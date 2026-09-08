@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="icon_padding">10dp</dimen>
+    <dimen name="icon_padding">8dp</dimen>
     <dimen name="margin_horizontal">16dp</dimen>
     <dimen name="margin_vertical">24dp</dimen>
-    <dimen name="button_inset">16dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
+    <dimen name="button_inset">0dp</dimen>
     <dimen name="corner_radius">16dp</dimen>
     <dimen name="top_bar_height">56dp</dimen>
     <dimen name="text_size_medium">22sp</dimen>
