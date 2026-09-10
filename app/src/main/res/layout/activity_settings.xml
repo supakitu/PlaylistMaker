@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,18 +12,20 @@
         android:layout_height="@dimen/top_bar_height">
 
         <ImageButton
-            android:id="@+id/btnArrowBack"
+            android:id="@+id/btn_arrow_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_gravity="center|start"
+            android:layout_gravity="center"
             android:layout_marginEnd="12dp"
-            android:backgroundTint="@color/yp_white"
+            android:background="@android:color/transparent"
+            android:contentDescription="Назад"
+            android:foreground="?attr/selectableItemBackground"
             app:srcCompat="@drawable/arrow_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|start"
+            android:layout_gravity="center"
             android:fontFamily="sans-serif-medium"
             android:text="@string/settings"
             android:textColor="@color/yp_black"
@@ -41,13 +42,16 @@
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:foreground="?attr/selectableItemBackground"
             android:text="@string/black_theme"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_regular" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
+            android:layout_height="@dimen/item_height"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,13 +65,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
+                android:contentDescription="@string/share"
                 app:srcCompat="@drawable/share"
                 app:tint="@color/yp_text_gray" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
+            android:layout_height="@dimen/item_height"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,13 +88,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
+                android:contentDescription="@string/support"
                 app:srcCompat="@drawable/support"
                 app:tint="@color/yp_text_gray" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
+            android:layout_height="@dimen/item_height"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
+                android:contentDescription="@string/user_agreement"
                 app:srcCompat="@drawable/arrow_forward"
                 app:tint="@color/yp_text_gray" />
         </FrameLayout>

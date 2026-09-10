@@ -1,8 +1,6 @@
 package com.practicum.playlistmaker
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,10 +18,7 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val btnArrowBack = findViewById<ImageButton>(R.id.btnArrowBack)
-        btnArrowBack.setOnClickListener {
-            val searchIntent = Intent(this, MainActivity::class.java)
-            startActivity(searchIntent)
-        }
+        val btnArrowBack = findViewById<ImageButton>(R.id.btn_arrow_back)
+        btnArrowBack.setOnClickListener { finish() }
     }
 }
