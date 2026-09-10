@@ -19,8 +19,6 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val btnArrowBack = findViewById<ImageButton>(R.id.btn_arrow_back)
-        btnArrowBack.setOnClickListener {
-            finish()
-        }
+        btnArrowBack.setOnClickListener { finish() }
     }
 }
