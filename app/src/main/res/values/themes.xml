@@ -4,7 +4,7 @@
         <item name="android:background">@color/yp_white</item>
     </style>
 
-    <style name="MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="MainActivity" parent="Base.Theme.PlaylistMaker">
         <item name="android:background">@color/yp_blue</item>
     </style>
 </resources>

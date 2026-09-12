@@ -4,54 +4,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:theme="@style/MainActivity">
+    android:layout_marginHorizontal="@dimen/margin_horizontal"
+    android:layout_marginBottom="@dimen/margin_vertical"
+    android:orientation="vertical">
 
     <TextView
         style="@style/YSMedium22"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
+        android:layout_marginBottom="@dimen/margin_vertical"
         android:gravity="center|start"
         android:text="@string/app_name"
         android:textColor="@color/yp_white" />
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_search"
+        style="@style/MainButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:layout_marginTop="@dimen/margin_vertical"
-        android:layout_marginBottom="@dimen/margin_vertical"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/button_margin"
+        android:layout_weight="1"
+        android:text="@string/search"
+        app:icon="@drawable/search" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_search"
-            style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/button_margin"
-            android:layout_weight="1"
-            android:text="@string/search"
-            app:icon="@drawable/search" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_media_library"
+        style="@style/MainButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/button_margin"
+        android:layout_weight="1"
+        android:text="@string/media_library"
+        app:icon="@drawable/library" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_media_library"
-            style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/button_margin"
-            android:layout_weight="1"
-            android:text="@string/media_library"
-            app:icon="@drawable/library" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_settings"
-            style="@style/MainButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/settings"
-            app:icon="@drawable/settings" />
-    </LinearLayout>
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings"
+        style="@style/MainButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/settings"
+        app:icon="@drawable/settings" />
 </LinearLayout>
