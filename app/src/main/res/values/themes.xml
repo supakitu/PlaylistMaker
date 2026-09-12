@@ -1,7 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.PlaylistMaker" parent="Theme.Material3.DayNight.NoActionBar">
 
+    <style name="Base.Theme.PlaylistMaker" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:background">@color/yp_white</item>
     </style>
 
-    <style name="Theme.PlaylistMaker" parent="Base.Theme.PlaylistMaker" />
+    <style name="MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:background">@color/yp_blue</item>
+    </style>
 </resources>

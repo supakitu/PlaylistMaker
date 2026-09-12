@@ -8,10 +8,10 @@
     tools:context=".MediaLibraryActivity">
 
     <TextView
+        style="@style/YSMedium22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/media_library"
-        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
