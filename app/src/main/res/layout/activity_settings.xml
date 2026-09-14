@@ -7,99 +7,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_height">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_vertical"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="@string/settings" />
 
-        <ImageButton
-            android:id="@+id/btn_arrow_back"
-            style="@style/ActionBarButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="12dp"
-            android:background="@android:color/transparent"
-            android:foreground="?attr/selectableItemBackground"
-            app:srcCompat="@drawable/arrow_back" />
-
-        <TextView
-            style="@style/YSMedium22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/settings" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        style="@style/Switch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:layout_marginTop="@dimen/margin_vertical"
-        android:orientation="vertical">
+        android:layout_height="@dimen/item_height"
+        android:paddingHorizontal="@dimen/margin_horizontal"
+        android:text="@string/black_theme"
+        app:switchTextAppearance="@style/YSRegular16" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            style="@style/YSRegular16"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:text="@string/black_theme" />
+    <com.google.android.material.button.MaterialButton
+        style="@style/Item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="@string/share"
+        app:icon="@drawable/share" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
+    <com.google.android.material.button.MaterialButton
+        style="@style/Item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="@string/support"
+        app:icon="@drawable/support" />
 
-            <TextView
-                style="@style/YSRegular16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:text="@string/share" />
-
-            <ImageView
-                style="@style/ItemIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|end"
-                app:srcCompat="@drawable/share" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
-
-            <TextView
-                style="@style/YSRegular16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:text="@string/support" />
-
-            <ImageView
-                style="@style/ItemIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|end"
-                app:srcCompat="@drawable/support" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height">
-
-            <TextView
-                style="@style/YSRegular16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:text="@string/user_agreement" />
-
-            <ImageView
-                style="@style/ItemIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|end"
-                app:srcCompat="@drawable/arrow_forward" />
-        </FrameLayout>
-
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        style="@style/Item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="@string/user_agreement"
+        app:icon="@drawable/arrow_forward" />
 
 </LinearLayout>
