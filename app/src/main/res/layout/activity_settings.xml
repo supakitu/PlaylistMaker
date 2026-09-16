@@ -26,6 +26,7 @@
         app:switchTextAppearance="@style/YSRegular16" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_share"
         style="@style/Item"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
@@ -33,6 +34,7 @@
         app:icon="@drawable/share" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_support"
         style="@style/Item"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
@@ -40,7 +42,7 @@
         app:icon="@drawable/support" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_user_agreement"
         style="@style/Item"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
