@@ -37,7 +37,6 @@
     <style name="Switch" parent="YSRegular16">
         <item name="thumbTint">#00D6C3</item>
         <item name="trackTint">#76EAE0</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
     <style name="MainButtonStyle" parent="YSMedium22">
@@ -55,4 +54,22 @@
         <item name="iconSize">@dimen/icon_size</item>
         <item name="iconTint">@color/yp_black</item>
     </style>
+
+    <style name="EditTextSearch" parent="YSRegular16">
+        <item name="android:drawableTint">@color/yp_text_gray</item>
+        <item name="android:textColorHint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="SearchButtonTintStyle">
+        <item name="android:backgroundTint">@color/yp_light_gray</item>
+    </style>
+
+    <style name="ImageButtonTintStyle">
+        <item name="android:tint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="TransparentBackground">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

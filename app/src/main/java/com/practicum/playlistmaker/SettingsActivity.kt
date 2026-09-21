@@ -22,9 +22,12 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
+        val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
+        val btnShare = findViewById<MaterialButton>(R.id.btn_share)
+
         toolbar.setNavigationOnClickListener { finish() }
 
-        val btnShare = findViewById<MaterialButton>(R.id.btn_share)
         btnShare.setOnClickListener {
             val link = getString(R.string.link_practicum_android_developer)
 
@@ -34,9 +37,8 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
         btnSupport.setOnClickListener {
-            val myEmail = getString(R.string.my_email)
+            val myEmail = getString(R.string.some_email)
             val emailSubject = getString(R.string.email_subject)
             val emailText = getString(R.string.email_text)
 
@@ -46,7 +48,6 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
         btnUserAgreement.setOnClickListener {
             val link = getString(R.string.link_practicum_offer)
 
