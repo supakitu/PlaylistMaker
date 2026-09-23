@@ -42,7 +42,7 @@
             <EditText
                 android:id="@+id/et_search"
                 style="@style/EditTextSearch"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/et_search_height"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
