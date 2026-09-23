@@ -26,7 +26,7 @@
         android:layout_marginBottom="@dimen/button_margin"
         android:layout_weight="1"
         android:text="@string/search"
-        app:icon="@drawable/search" />
+        app:icon="@drawable/search_icon" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_media_library"

@@ -66,10 +66,10 @@ class SearchActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
-        if (etSearchValue != null) {
-            val etSearch = findViewById<EditText>(R.id.et_search)
-            val etSearchValue = savedInstanceState.getString("EDIT_TEXT_VALUE")
+        val etSearch = findViewById<EditText>(R.id.et_search)
+        val etSearchValue = savedInstanceState.getString("EDIT_TEXT_VALUE")
 
+        if (etSearchValue != null) {
             etSearch.setText(etSearchValue)
         }
     }
