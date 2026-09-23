@@ -34,29 +34,35 @@
             android:insetBottom="@dimen/button_inset"
             app:cornerRadius="8dp" />
 
-        <EditText
-            android:id="@+id/et_search"
-            style="@style/EditTextSearch"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/et_search_height"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="@android:color/transparent"
-            android:drawableStart="@drawable/search_icon"
-            android:drawablePadding="8dp"
-            android:hint="@string/search"
-            android:inputType="text"
-            android:maxLength="40"
-            android:textColorHighlight="@color/yp_blue" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_clear"
-            style="@style/ImageButtonTintStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
-            android:backgroundTint="@android:color/transparent"
-            android:visibility="gone"
-            app:srcCompat="@drawable/clear" />
+            <EditText
+                android:id="@+id/et_search"
+                style="@style/EditTextSearch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/et_search_height"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="8dp"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:textColorHighlight="@color/yp_blue_light" />
+
+            <ImageButton
+                android:id="@+id/btn_clear"
+                style="@style/ImageButtonTintStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/et_search_height"
+                android:layout_gravity="center|end"
+                android:backgroundTint="@android:color/transparent"
+                android:visibility="gone"
+                app:srcCompat="@drawable/clear" />
+        </LinearLayout>
 
     </FrameLayout>
 </LinearLayout>
