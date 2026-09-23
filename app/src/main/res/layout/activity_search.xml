@@ -44,9 +44,9 @@
             android:drawableStart="@drawable/search"
             android:drawablePadding="8dp"
             android:hint="@string/search"
+            android:inputType="text"
             android:maxLength="30"
-            android:textColorHighlight="@color/yp_blue"
-            android:theme="@style/TransparentBackground" />
+            android:textColorHighlight="@color/yp_blue" />
 
         <ImageButton
             android:id="@+id/btn_clear"

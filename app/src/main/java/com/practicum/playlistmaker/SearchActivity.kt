@@ -1,6 +1,5 @@
 package com.practicum.playlistmaker
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +14,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class SearchActivity : AppCompatActivity() {
+
+    private var etSearchValue: Editable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,7 +35,7 @@ class SearchActivity : AppCompatActivity() {
 
         btnClear.setOnClickListener {
             etSearch.setText("")
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(toolbar.windowToken, 0)
         }
 
@@ -48,7 +50,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // Заглушка
+                etSearchValue = s
             }
         })
     }
@@ -58,6 +60,25 @@ class SearchActivity : AppCompatActivity() {
             View.GONE
         } else {
             View.VISIBLE
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        if (etSearchValue != null) {
+            val etSearch = findViewById<EditText>(R.id.et_search)
+            val etSearchValue = savedInstanceState.getString("EDIT_TEXT_VALUE")
+
+            etSearch.setText(etSearchValue)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        if (etSearchValue != null) {
+            outState.putString("EDIT_TEXT_VALUE", etSearchValue.toString())
         }
     }
 }

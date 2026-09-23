@@ -3,9 +3,10 @@
     <style name="Base.Theme.PlaylistMaker" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/yp_white</item>
         <item name="colorControlActivated">@color/yp_blue</item>
+        <item name="colorControlHighlight">#20000000</item>
     </style>
 
     <style name="MainActivity" parent="Base.Theme.PlaylistMaker">
-        <item name="android:background">@color/yp_blue</item>
+        <item name="android:windowBackground">@color/yp_blue</item>
     </style>
 </resources>
