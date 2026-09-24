@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="YSMedium22">
+        <item name="android:textColor">@color/yp_white</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+    </style>
+
+    <style name="YSRegular16">
+        <item name="android:textColor">@color/yp_white</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="titleTextAppearance">@style/YSMedium22</item>
+        <item name="navigationIconTint">@color/yp_white</item>
+    </style>
+
+    <style name="Item" parent="YSRegular16">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_height</item>
+        <item name="android:gravity">center|start</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingHorizontal">@dimen/margin_horizontal</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+
+        <item name="backgroundTint">@color/yp_black</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="iconGravity">end</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/yp_white</item>
+    </style>
+
+    <style name="Switch" parent="YSRegular16">
+        <item name="thumbTint">@color/yp_blue</item>
+        <item name="trackTint">@color/yp_blue_light</item>
+    </style>
+
+    <style name="EditTextSearch" parent="YSRegular16">
+        <item name="android:drawableTint">@color/yp_black</item>
+        <item name="android:textColorHint">@color/yp_black</item>
+        <item name="android:textColor">@color/yp_black</item>
+    </style>
+
+    <style name="SearchButtonTintStyle">
+        <item name="android:backgroundTint">@color/yp_white</item>
+    </style>
+
+    <style name="ImageButtonTintStyle">
+        <item name="android:tint">@color/yp_black</item>
+    </style>
+
+</resources>

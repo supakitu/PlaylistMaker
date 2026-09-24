@@ -1,4 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="MainButtonStyle">
+        <item name="android:backgroundTint">@color/yp_white</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:insetTop">@dimen/button_inset</item>
+        <item name="android:insetBottom">@dimen/button_inset</item>
+        <item name="android:outlineSpotShadowColor">@android:color/transparent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/YSMedium22</item>
+        <item name="android:textColor">@color/yp_black</item>
+
+        <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/icon_padding</item>
+        <item name="iconSize">@dimen/icon_size</item>
+        <item name="iconTint">@color/yp_black</item>
+    </style>
+
+    <style name="YSMedium22">
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+    </style>
+
+    <style name="YSRegular16">
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="titleTextAppearance">@style/YSMedium22</item>
+        <item name="navigationIconTint">@color/yp_black</item>
+    </style>
+
+    <style name="Item" parent="YSRegular16">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_height</item>
+        <item name="android:gravity">center|start</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingHorizontal">@dimen/margin_horizontal</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+
+        <item name="backgroundTint">@color/yp_white</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="iconGravity">end</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="Switch" parent="YSRegular16">
+        <item name="thumbTint">#00D6C3</item>
+        <item name="trackTint">#76EAE0</item>
+    </style>
+
+    <style name="EditTextSearch" parent="YSRegular16">
+        <item name="android:drawableTint">@color/yp_text_gray</item>
+        <item name="android:textColorHint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="SearchButtonTintStyle">
+        <item name="android:backgroundTint">@color/yp_light_gray</item>
+    </style>
+
+    <style name="ImageButtonTintStyle">
+        <item name="android:tint">@color/yp_text_gray</item>
+    </style>
+
 </resources>
