@@ -48,7 +48,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                btnClear.visibility = btnClearVisibility(s)
+                btnClear.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -91,14 +91,6 @@ class SearchActivity : AppCompatActivity() {
 
         val adapter = TrackAdapter(tracks)
         rvTracks.adapter = adapter
-    }
-
-    private fun btnClearVisibility(s: CharSequence?): Int {
-        return if (s.isNullOrEmpty()) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
