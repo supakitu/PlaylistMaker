@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MainButtonStyle">
+    <style name="MainButton">
         <item name="android:backgroundTint">@color/yp_white</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:insetTop">@dimen/button_inset</item>
@@ -24,9 +24,14 @@
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
 
-    <style name="YSRegular16">
-        <item name="android:textColor">@color/yp_black</item>
+    <style name="YSRegular16" parent="YSMedium22">
         <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+    </style>
+
+    <style name="YSRegular11" parent="YSMedium22">
+        <item name="android:textColor">@color/yp_text_gray</item>
+        <item name="android:textSize">11sp</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
     </style>
 
@@ -36,8 +41,6 @@
     </style>
 
     <style name="Item" parent="YSRegular16">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/item_height</item>
         <item name="android:gravity">center|start</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -61,11 +64,23 @@
         <item name="android:textColorHint">@color/yp_text_gray</item>
     </style>
 
-    <style name="SearchButtonTintStyle">
+    <style name="SearchButtonTint">
         <item name="android:backgroundTint">@color/yp_light_gray</item>
     </style>
 
-    <style name="ImageButtonTintStyle">
+    <style name="ClearButtonTint">
+        <item name="android:tint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="ItemTrack">
+        <item name="cardBackgroundColor">@color/yp_white</item>
+    </style>
+
+    <style name="DotTint">
+        <item name="android:tint">@color/yp_text_gray</item>
+    </style>
+
+    <style name="ArrowTint">
         <item name="android:tint">@color/yp_text_gray</item>
     </style>
 

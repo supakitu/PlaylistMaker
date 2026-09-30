@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Отступы и поля -->
     <dimen name="icon_padding">8dp</dimen>
     <dimen name="margin_horizontal">16dp</dimen>
     <dimen name="margin_vertical">24dp</dimen>
+
+    <!-- Компоненты навигации и контейнеры -->
+    <dimen name="item_height">61dp</dimen>
+    <dimen name="et_search_height">40dp</dimen>
+
+    <!-- Кнопки и скругления -->
     <dimen name="button_margin">16dp</dimen>
     <dimen name="button_inset">0dp</dimen>
     <dimen name="corner_radius">16dp</dimen>
-    <dimen name="top_bar_height">56dp</dimen>
+
+    <!-- Текст и Иконки -->
     <dimen name="text_size_medium">22sp</dimen>
     <dimen name="text_size_regular">16sp</dimen>
-    <dimen name="icon_size">24sp</dimen>
-    <dimen name="item_height">61sp</dimen>
-    <dimen name="et_search_height">40sp</dimen>
+    <dimen name="icon_size">24dp</dimen>
 </resources>

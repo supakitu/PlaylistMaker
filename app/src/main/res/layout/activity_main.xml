@@ -20,17 +20,17 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_search"
-        style="@style/MainButtonStyle"
+        style="@style/MainButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/button_margin"
         android:layout_weight="1"
         android:text="@string/search"
-        app:icon="@drawable/search_icon" />
+        app:icon="@drawable/icon_search" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_media_library"
-        style="@style/MainButtonStyle"
+        style="@style/MainButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/button_margin"
@@ -40,7 +40,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_settings"
-        style="@style/MainButtonStyle"
+        style="@style/MainButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
