@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
 
@@ -30,6 +31,7 @@ class SearchActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val btnClear = findViewById<ImageButton>(R.id.btn_clear)
         val etSearch = findViewById<EditText>(R.id.et_search)
+        val rvTracks = findViewById<RecyclerView>(R.id.rv_tracks)
 
         toolbar.setNavigationOnClickListener { finish() }
 
@@ -87,7 +89,8 @@ class SearchActivity : AppCompatActivity() {
             ),
         )
 
-//        val adapter =
+        val adapter = TrackAdapter(tracks)
+        rvTracks.adapter = adapter
     }
 
     private fun btnClearVisibility(s: CharSequence?): Int {

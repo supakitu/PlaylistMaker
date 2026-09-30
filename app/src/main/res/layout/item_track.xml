@@ -6,6 +6,8 @@
     style="@style/ItemTrack"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,11 +24,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_launcher_background" />
+            tools:srcCompat="@drawable/placeholder_track" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image_arrow"
             app:layout_constraintStart_toEndOf="@+id/image_artwork"
@@ -35,8 +38,7 @@
             <TextView
                 android:id="@+id/tv_track_name"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/YSRegular16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,17 +47,17 @@
             <TextView
                 android:id="@+id/tv_artist_name"
                 android:layout_width="wrap_content"
-                android:layout_height="13dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/YSRegular11"
                 app:layout_constraintStart_toStartOf="@+id/tv_track_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
                 tools:text="The Beatles" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_dot"
                 style="@style/DotTint"
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_artist_name"
                 app:layout_constraintStart_toEndOf="@+id/tv_artist_name"
                 app:srcCompat="@drawable/icon_dot" />
@@ -63,10 +65,10 @@
             <TextView
                 android:id="@+id/tv_track_time"
                 android:layout_width="wrap_content"
-                android:layout_height="13dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/YSRegular11"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/image_dot"
+                app:layout_constraintStart_toEndOf="@+id/image_dot"
                 tools:text="5:03" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
