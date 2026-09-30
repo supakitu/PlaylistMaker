@@ -8,7 +8,9 @@
     android:layout_height="@dimen/item_height"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="0dp">
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
