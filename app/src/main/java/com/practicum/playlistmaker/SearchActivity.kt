@@ -89,8 +89,7 @@ class SearchActivity : AppCompatActivity() {
             ),
         )
 
-        val adapter = TrackAdapter(tracks)
-        rvTracks.adapter = adapter
+        rvTracks.adapter = TrackAdapter(tracks)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

@@ -21,7 +21,7 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         artistName.text = model.artistName
         trackTime.text = model.trackTime
 
-        val radiusPx = dpToPx(2f, itemView.context)
+        val radiusPx = 2f.toPx(itemView.context)
 
         Glide.with(itemView)
             .load(model.artworkUrl100)
@@ -32,10 +32,10 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
 
-        private fun dpToPx(dp: Float, context: Context): Int {
+        private fun Float.toPx(context: Context): Int {
             return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                dp,
+                this,
                 context.resources.displayMetrics
             ).toInt()
         }
