@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
-class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val trackName = itemView.findViewById<TextView>(R.id.tv_track_name)
     private val artistName = itemView.findViewById<TextView>(R.id.tv_artist_name)
     private val trackTime = itemView.findViewById<TextView>(R.id.tv_track_time)
     private val artwork = itemView.findViewById<ImageView>(R.id.image_artwork)
 
-    fun bind(model: Track) {
+    fun bind(model: Song) {
         trackName.text = model.trackName
         artistName.text = model.artistName
         trackTime.text = model.trackTime
@@ -24,7 +24,7 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val radiusPx = 2f.toPx(itemView.context)
 
         Glide.with(itemView)
-            .load(model.artworkUrl100)
+            .load(model.artworkUrl)
             .placeholder(R.drawable.placeholder_track)
             .transform(RoundedCorners(radiusPx))
             .into(artwork)
@@ -32,12 +32,11 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
 
-        private fun Float.toPx(context: Context): Int {
-            return TypedValue.applyDimension(
+        private fun Float.toPx(context: Context): Int =
+            TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 this,
                 context.resources.displayMetrics
             ).toInt()
-        }
     }
 }

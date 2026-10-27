@@ -51,6 +51,7 @@
                 android:hint="@string/search"
                 android:inputType="text"
                 android:paddingStart="12dp"
+                android:singleLine="true"
                 android:textColorHighlight="@color/yp_blue_light" />
 
             <ImageButton
