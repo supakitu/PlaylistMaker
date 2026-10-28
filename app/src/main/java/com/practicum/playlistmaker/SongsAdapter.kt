@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class SongsAdapter(val songs: List<Song> = ArrayList<Song>()) : RecyclerView.Adapter<SongViewHolder>() {
+class SongsAdapter(val songs: List<Song>) : RecyclerView.Adapter<SongViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val itemView = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_track, parent, false)
+            .inflate(R.layout.item_song, parent, false)
 
         return SongViewHolder(itemView)
     }
