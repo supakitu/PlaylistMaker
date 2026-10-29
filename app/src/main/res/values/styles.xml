@@ -84,4 +84,9 @@
         <item name="android:tint">@color/yp_text_gray</item>
     </style>
 
+    <style name="UpdateButtonTint">
+        <item name="android:textColor">@color/yp_white</item>
+        <item name="android:backgroundTint">@color/yp_black</item>
+    </style>
+
 </resources>

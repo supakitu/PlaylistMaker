@@ -21,8 +21,6 @@
             android:id="@+id/image_artwork"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_gravity="center|start"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,17 +37,21 @@
 
             <TextView
                 android:id="@+id/tv_track_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textAppearance="@style/YSRegular16"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Yesterday (Remastered 2009)" />
+                tools:text="Here Comes The Sun (Remastered version 2010)" />
 
             <TextView
                 android:id="@+id/tv_artist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:textAppearance="@style/YSRegular11"
                 app:layout_constraintStart_toStartOf="@+id/tv_track_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
@@ -60,17 +62,18 @@
                 style="@style/DotTint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_artist_name"
                 app:layout_constraintStart_toEndOf="@+id/tv_artist_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_artist_name"
                 app:srcCompat="@drawable/icon_dot" />
 
             <TextView
                 android:id="@+id/tv_track_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:textAppearance="@style/YSRegular11"
-                app:layout_constraintBottom_toBottomOf="@+id/image_dot"
                 app:layout_constraintStart_toEndOf="@+id/image_dot"
+                app:layout_constraintTop_toTopOf="@+id/image_dot"
                 tools:text="5:03" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

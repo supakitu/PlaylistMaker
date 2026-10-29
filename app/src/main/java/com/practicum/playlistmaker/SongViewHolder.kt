@@ -1,6 +1,7 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -8,23 +9,24 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.util.Locale
 
-class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val trackName = itemView.findViewById<TextView>(R.id.tv_track_name)
     private val artistName = itemView.findViewById<TextView>(R.id.tv_artist_name)
     private val trackTime = itemView.findViewById<TextView>(R.id.tv_track_time)
     private val artwork = itemView.findViewById<ImageView>(R.id.image_artwork)
 
-    fun bind(model: Track) {
+    fun bind(model: Song) {
         trackName.text = model.trackName
         artistName.text = model.artistName
-        trackTime.text = model.trackTime
+        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(model.trackTime)
 
-        val radiusPx = dpToPx(2f, itemView.context)
+        val radiusPx = 2f.toPx(itemView.context)
 
         Glide.with(itemView)
-            .load(model.artworkUrl100)
+            .load(model.artworkUrl)
             .placeholder(R.drawable.placeholder_track)
             .transform(RoundedCorners(radiusPx))
             .into(artwork)
@@ -32,12 +34,11 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
 
-        private fun dpToPx(dp: Float, context: Context): Int {
-            return TypedValue.applyDimension(
+        private fun Float.toPx(context: Context): Int =
+            TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                dp,
+                this,
                 context.resources.displayMetrics
             ).toInt()
-        }
     }
 }
