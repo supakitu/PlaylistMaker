@@ -55,8 +55,8 @@
     </style>
 
     <style name="Switch" parent="YSRegular16">
-        <item name="thumbTint">#00D6C3</item>
-        <item name="trackTint">#76EAE0</item>
+        <item name="thumbTint">@color/yp_text_gray</item>
+        <item name="trackTint">@color/yp_light_gray</item>
     </style>
 
     <style name="EditTextSearch" parent="YSRegular16">

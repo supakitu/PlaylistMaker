@@ -35,15 +35,9 @@ class SettingsActivity : AppCompatActivity() {
 
         switchTheme.isChecked = sharedPrefs.getBoolean(App.DARK_THEME_KEY, App.DARK_THEME_DEFAULT)
         switchTheme.setOnCheckedChangeListener { switcher, isChecked ->
-            if (isChecked) {
-                sharedPrefs.edit()
-                    .putBoolean(App.DARK_THEME_KEY, true)
-                    .apply()
-            } else {
-                sharedPrefs.edit()
-                    .remove(App.DARK_THEME_KEY)
-                    .apply()
-            }
+            sharedPrefs.edit()
+                .putBoolean(App.DARK_THEME_KEY, isChecked)
+                .apply()
 
             App.switchTheme(isChecked)
         }
