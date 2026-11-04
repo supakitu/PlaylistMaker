@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
+import androidx.core.content.edit
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -35,9 +36,9 @@ class SettingsActivity : AppCompatActivity() {
 
         switchTheme.isChecked = sharedPrefs.getBoolean(App.DARK_THEME_KEY, App.DARK_THEME_DEFAULT)
         switchTheme.setOnCheckedChangeListener { switcher, isChecked ->
-            sharedPrefs.edit()
-                .putBoolean(App.DARK_THEME_KEY, isChecked)
-                .apply()
+            sharedPrefs.edit {
+                putBoolean(App.DARK_THEME_KEY, isChecked)
+            }
 
             App.switchTheme(isChecked)
         }

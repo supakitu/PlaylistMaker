@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val iTunesApiService = retrofit.create(ITunesApi::class.java)
 
-    private var songs = ArrayList<Song>()
+    private var tracks = ArrayList<Track>()
     private var lastSearchQuery: String? = null
 
     private lateinit var etSearch: EditText
@@ -55,7 +55,7 @@ class SearchActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val btnClearText = findViewById<ImageButton>(R.id.btn_clear_text)
         etSearch = findViewById(R.id.et_search)
-        rvTracks = findViewById(R.id.rv_songs)
+        rvTracks = findViewById(R.id.rv_tracks)
         imageNoInternet = findViewById(R.id.image_placeholder_no_internet)
         imageNothingFound = findViewById(R.id.image_placeholder_nothing_found)
         tvNoInternet = findViewById(R.id.tv_placeholder_no_internet)
@@ -70,7 +70,7 @@ class SearchActivity : AppCompatActivity() {
             inputMethodManager?.hideSoftInputFromWindow(toolbar.windowToken, 0)
         }
 
-        rvTracks.adapter = SongsAdapter(songs)
+        rvTracks.adapter = TracksAdapter(tracks)
 
         etSearch.requestFocus()
         etSearch.addTextChangedListener(object : TextWatcher {
@@ -106,18 +106,18 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun search(text: String) {
-        iTunesApiService.search(text).enqueue(object : Callback<SongsResponse> {
-            override fun onResponse(call: Call<SongsResponse>, response: Response<SongsResponse>) {
+        iTunesApiService.search(text).enqueue(object : Callback<TracksResponse> {
+            override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
                 if (response.body() != null) {
-                    val songsResponse: SongsResponse = response.body()!!
+                    val tracksResponse: TracksResponse = response.body()!!
 
-                    if (songsResponse.results.isNotEmpty()) {
-                        songs.clear()
-                        songs.addAll(songsResponse.results)
+                    if (tracksResponse.results.isNotEmpty()) {
+                        tracks.clear()
+                        tracks.addAll(tracksResponse.results)
 
                         rvTracks.adapter?.notifyDataSetChanged()
                     } else {
-                        songs.clear()
+                        tracks.clear()
                         rvTracks.adapter?.notifyDataSetChanged()
 
                         imageNothingFound.visibility = View.VISIBLE
@@ -126,8 +126,8 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<SongsResponse>, t: Throwable) {
-                songs.clear()
+            override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
+                tracks.clear()
                 rvTracks.adapter?.notifyDataSetChanged()
 
                 imageNoInternet.visibility = View.VISIBLE
