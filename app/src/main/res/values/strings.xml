@@ -14,4 +14,5 @@
     <string name="email_text">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="no_internet">Проблемы со связью \n\n Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="nothing_found">Ничего не нашлось</string>
+    <string name="update">Обновить</string>
 </resources>

@@ -10,10 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.Placeholder
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -36,11 +39,10 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var etSearch: EditText
     private lateinit var rvTracks: RecyclerView
-    private lateinit var imageNoInternet: ImageView
-    private lateinit var imageNothingFound: ImageView
-    private lateinit var tvNoInternet: TextView
-    private lateinit var tvNothingFound: TextView
+    private lateinit var placeholderNothingFound: LinearLayout
+    private lateinit var placeholderNoInternet: LinearLayout
     private lateinit var btnUpdate: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +58,10 @@ class SearchActivity : AppCompatActivity() {
         val btnClearText = findViewById<ImageButton>(R.id.btn_clear_text)
         etSearch = findViewById(R.id.et_search)
         rvTracks = findViewById(R.id.rv_tracks)
-        imageNoInternet = findViewById(R.id.image_placeholder_no_internet)
-        imageNothingFound = findViewById(R.id.image_placeholder_nothing_found)
-        tvNoInternet = findViewById(R.id.tv_placeholder_no_internet)
-        tvNothingFound = findViewById(R.id.tv_placeholder_nothing_found)
+        placeholderNothingFound = findViewById(R.id.placeholder_nothing_found)
+        placeholderNoInternet = findViewById(R.id.placeholder_no_internet)
         btnUpdate = findViewById(R.id.btn_update)
+        progressBar = findViewById(R.id.progress_bar)
 
         toolbar.setNavigationOnClickListener { finish() }
 
@@ -88,6 +89,9 @@ class SearchActivity : AppCompatActivity() {
                     search(etSearch.text.toString())
                     lastSearchQuery = etSearch.text.toString()
 
+                    rvTracks.visibility = View.GONE
+                    progressBar.visibility = View.VISIBLE
+
                     hidePlaceholders()
                 }
 
@@ -100,6 +104,9 @@ class SearchActivity : AppCompatActivity() {
             if (lastSearchQuery != null) {
                 search(lastSearchQuery!!)
 
+                rvTracks.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+
                 hidePlaceholders()
             }
         }
@@ -108,6 +115,9 @@ class SearchActivity : AppCompatActivity() {
     fun search(text: String) {
         iTunesApiService.search(text).enqueue(object : Callback<TracksResponse> {
             override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
+                progressBar.visibility = View.GONE
+                rvTracks.visibility = View.VISIBLE
+
                 if (response.body() != null) {
                     val tracksResponse: TracksResponse = response.body()!!
 
@@ -117,32 +127,21 @@ class SearchActivity : AppCompatActivity() {
 
                         rvTracks.adapter?.notifyDataSetChanged()
                     } else {
-                        tracks.clear()
-                        rvTracks.adapter?.notifyDataSetChanged()
-
-                        imageNothingFound.visibility = View.VISIBLE
-                        tvNothingFound.visibility = View.VISIBLE
+                        rvTracks.visibility = View.GONE
+                        placeholderNothingFound.visibility = View.VISIBLE
                     }
                 }
             }
 
             override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
-                tracks.clear()
-                rvTracks.adapter?.notifyDataSetChanged()
-
-                imageNoInternet.visibility = View.VISIBLE
-                tvNoInternet.visibility = View.VISIBLE
-                btnUpdate.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+                placeholderNoInternet.visibility = View.VISIBLE
             }
         })
     }
 
     fun hidePlaceholders() {
-        imageNoInternet.visibility = View.GONE
-        tvNoInternet.visibility = View.GONE
-
-        imageNothingFound.visibility = View.GONE
-        tvNothingFound.visibility = View.GONE
-        btnUpdate.visibility = View.GONE
+        placeholderNothingFound.visibility = View.GONE
+        placeholderNoInternet.visibility = View.GONE
     }
 }
