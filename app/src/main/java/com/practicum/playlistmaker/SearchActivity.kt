@@ -103,16 +103,13 @@ class SearchActivity : AppCompatActivity() {
             if (lastSearchQuery != null) {
                 search(lastSearchQuery!!)
 
-                hideRecycler()
                 showProgressBar()
-
-                hidePlaceholderNothingFound()
                 hidePlaceholderNoInternet()
             }
         }
     }
 
-    fun search(text: String) {
+    private fun search(text: String) {
         iTunesApiService.search(text).enqueue(object : Callback<TracksResponse> {
             override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
                 hideProgressBar()
@@ -126,6 +123,7 @@ class SearchActivity : AppCompatActivity() {
 
                         rvTracks.adapter?.notifyDataSetChanged()
                         showRecycler()
+                        rvTracks.scrollToPosition(0)
                     } else {
                         showPlaceholderNothingFound()
                     }
