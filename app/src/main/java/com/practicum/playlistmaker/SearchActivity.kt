@@ -9,14 +9,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.Placeholder
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -89,25 +86,28 @@ class SearchActivity : AppCompatActivity() {
                     search(etSearch.text.toString())
                     lastSearchQuery = etSearch.text.toString()
 
-                    rvTracks.visibility = View.GONE
-                    progressBar.visibility = View.VISIBLE
+                    hideRecycler()
+                    showProgressBar()
 
-                    hidePlaceholders()
+                    hidePlaceholderNothingFound()
+                    hidePlaceholderNoInternet()
                 }
 
                 true
+            } else {
+                false
             }
-            false
         }
 
         btnUpdate.setOnClickListener {
             if (lastSearchQuery != null) {
                 search(lastSearchQuery!!)
 
-                rvTracks.visibility = View.GONE
-                progressBar.visibility = View.VISIBLE
+                hideRecycler()
+                showProgressBar()
 
-                hidePlaceholders()
+                hidePlaceholderNothingFound()
+                hidePlaceholderNoInternet()
             }
         }
     }
@@ -115,33 +115,59 @@ class SearchActivity : AppCompatActivity() {
     fun search(text: String) {
         iTunesApiService.search(text).enqueue(object : Callback<TracksResponse> {
             override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
-                progressBar.visibility = View.GONE
-                rvTracks.visibility = View.VISIBLE
+                hideProgressBar()
 
                 if (response.body() != null) {
-                    val tracksResponse: TracksResponse = response.body()!!
+                    val responseBody = response.body()!!
 
-                    if (tracksResponse.results.isNotEmpty()) {
+                    if (responseBody.results.isNotEmpty()) {
                         tracks.clear()
-                        tracks.addAll(tracksResponse.results)
+                        tracks.addAll(responseBody.results)
 
                         rvTracks.adapter?.notifyDataSetChanged()
+                        showRecycler()
                     } else {
-                        rvTracks.visibility = View.GONE
-                        placeholderNothingFound.visibility = View.VISIBLE
+                        showPlaceholderNothingFound()
                     }
                 }
             }
 
             override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
-                progressBar.visibility = View.GONE
-                placeholderNoInternet.visibility = View.VISIBLE
+                hideProgressBar()
+                showPlaceholderNoInternet()
             }
         })
     }
 
-    fun hidePlaceholders() {
-        placeholderNothingFound.visibility = View.GONE
+    private fun showRecycler() {
+        rvTracks.visibility = View.VISIBLE
+    }
+
+    private fun hideRecycler() {
+        rvTracks.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
+
+    private fun showPlaceholderNoInternet() {
+        placeholderNoInternet.visibility = View.VISIBLE
+    }
+
+    private fun hidePlaceholderNoInternet() {
         placeholderNoInternet.visibility = View.GONE
+    }
+
+    private fun showPlaceholderNothingFound() {
+        placeholderNothingFound.visibility = View.VISIBLE
+    }
+
+    private fun hidePlaceholderNothingFound() {
+        placeholderNothingFound.visibility = View.GONE
     }
 }
