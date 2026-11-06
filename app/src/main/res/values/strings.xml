@@ -16,4 +16,5 @@
     <string name="nothing_found">Ничего не нашлось</string>
     <string name="update">Обновить</string>
     <string name="clear_history">Очистить историю</string>
+    <string name="you_have_watched">Вы искали</string>
 </resources>

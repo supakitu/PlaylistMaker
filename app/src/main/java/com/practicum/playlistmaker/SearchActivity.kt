@@ -9,8 +9,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -36,8 +36,8 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var etSearch: EditText
     private lateinit var rvTracks: RecyclerView
-    private lateinit var placeholderNothingFound: LinearLayout
-    private lateinit var placeholderNoInternet: LinearLayout
+    private lateinit var placeholderNothingFound: TextView
+    private lateinit var placeholderNoInternet: TextView
     private lateinit var btnUpdate: Button
     private lateinit var progressBar: ProgressBar
 
@@ -110,7 +110,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun search(text: String) {
-        iTunesApiService.search(text).enqueue(object : Callback<TracksResponse> {
+        val callback = object : Callback<TracksResponse> {
             override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
                 hideProgressBar()
 
@@ -123,10 +123,11 @@ class SearchActivity : AppCompatActivity() {
 
                         rvTracks.adapter?.notifyDataSetChanged()
                         showRecycler()
-                        rvTracks.scrollToPosition(0)
                     } else {
                         showPlaceholderNothingFound()
                     }
+                } else {
+                    showPlaceholderNothingFound()
                 }
             }
 
@@ -134,10 +135,13 @@ class SearchActivity : AppCompatActivity() {
                 hideProgressBar()
                 showPlaceholderNoInternet()
             }
-        })
+        }
+
+        iTunesApiService.search(text).enqueue(callback)
     }
 
     private fun showRecycler() {
+        rvTracks.scrollToPosition(0)
         rvTracks.visibility = View.VISIBLE
     }
 
@@ -155,9 +159,11 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showPlaceholderNoInternet() {
         placeholderNoInternet.visibility = View.VISIBLE
+        btnUpdate.visibility = View.VISIBLE
     }
 
     private fun hidePlaceholderNoInternet() {
+        btnUpdate.visibility = View.GONE
         placeholderNoInternet.visibility = View.GONE
     }
 

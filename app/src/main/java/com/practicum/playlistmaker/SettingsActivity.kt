@@ -25,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val switchTheme = findViewById<SwitchMaterial>(R.id.switch_theme)
+        val switchDarkTheme = findViewById<SwitchMaterial>(R.id.switch_dark_theme)
         val btnShare = findViewById<MaterialButton>(R.id.btn_share)
         val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
         val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
@@ -34,8 +34,8 @@ class SettingsActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener { finish() }
 
-        switchTheme.isChecked = sharedPrefs.getBoolean(App.DARK_THEME_KEY, App.DARK_THEME_DEFAULT)
-        switchTheme.setOnCheckedChangeListener { switcher, isChecked ->
+        switchDarkTheme.isChecked = sharedPrefs.getBoolean(App.DARK_THEME_KEY, App.DARK_THEME_DEFAULT)
+        switchDarkTheme.setOnCheckedChangeListener { switcher, isChecked ->
             sharedPrefs.edit {
                 putBoolean(App.DARK_THEME_KEY, isChecked)
             }
