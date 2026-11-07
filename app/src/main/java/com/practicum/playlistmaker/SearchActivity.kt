@@ -86,7 +86,7 @@ class SearchActivity : AppCompatActivity() {
                     search(etSearch.text.toString())
                     lastSearchQuery = etSearch.text.toString()
 
-                    hideRecycler()
+                    hideRvTracks()
                     showProgressBar()
 
                     hidePlaceholderNothingFound()
@@ -122,7 +122,7 @@ class SearchActivity : AppCompatActivity() {
                         tracks.addAll(responseBody.results)
 
                         rvTracks.adapter?.notifyDataSetChanged()
-                        showRecycler()
+                        showRvTracks()
                     } else {
                         showPlaceholderNothingFound()
                     }
@@ -140,12 +140,12 @@ class SearchActivity : AppCompatActivity() {
         iTunesApiService.search(text).enqueue(callback)
     }
 
-    private fun showRecycler() {
+    private fun showRvTracks() {
         rvTracks.scrollToPosition(0)
         rvTracks.visibility = View.VISIBLE
     }
 
-    private fun hideRecycler() {
+    private fun hideRvTracks() {
         rvTracks.visibility = View.GONE
     }
 

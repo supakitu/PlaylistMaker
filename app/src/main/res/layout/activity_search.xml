@@ -26,7 +26,7 @@
         android:layout_height="@dimen/et_search_height"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_search_input"
+        android:background="@drawable/bg_et_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -125,40 +125,44 @@
         app:layout_constraintTop_toBottomOf="@+id/placeholder_no_internet"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <LinearLayout
-        android:id="@+id/layout_you_have_watched"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <TextView
+        android:id="@+id/tv_recent_tracks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="42dp"
-        android:orientation="vertical"
+        android:fontFamily="@font/ys_display_medium"
+        android:gravity="center"
+        android:text="@string/recent_tracks"
+        android:textSize="19sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search_layout">
+        app:layout_constraintTop_toBottomOf="@+id/et_search_layout" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/ys_display_medium"
-            android:gravity="center"
-            android:text="@string/you_have_watched"
-            android:textSize="19sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recent_tracks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recent_tracks" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btn_clear_history"
-            style="@style/SearchActivityButtons"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:text="@string/clear_history"
-            tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_clear_history"
+        style="@style/SearchActivityButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:text="@string/clear_history"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_recent_tracks"
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

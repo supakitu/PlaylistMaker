@@ -30,14 +30,14 @@ class SettingsActivity : AppCompatActivity() {
         val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
         val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
 
-        val sharedPrefs = getSharedPreferences(App.PLAYLIST_MAKER_PREFERENCES, MODE_PRIVATE)
+        val sharedPrefs = getSharedPreferences(PrefsKeys.PLAYLIST_MAKER.key, MODE_PRIVATE)
 
         toolbar.setNavigationOnClickListener { finish() }
 
-        switchDarkTheme.isChecked = sharedPrefs.getBoolean(App.DARK_THEME_KEY, App.DARK_THEME_DEFAULT)
+        switchDarkTheme.isChecked = sharedPrefs.getBoolean(PrefsKeys.DARK_THEME.key, App.DARK_THEME_DEFAULT)
         switchDarkTheme.setOnCheckedChangeListener { switcher, isChecked ->
             sharedPrefs.edit {
-                putBoolean(App.DARK_THEME_KEY, isChecked)
+                putBoolean(PrefsKeys.DARK_THEME.key, isChecked)
             }
 
             App.switchTheme(isChecked)
