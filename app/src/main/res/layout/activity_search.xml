@@ -20,23 +20,24 @@
         app:navigationIcon="@drawable/arrow_back"
         app:title="@string/search" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/et_search_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/et_search_height"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_et_search"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <EditText
             android:id="@+id/et_search"
             style="@style/EditTextSearch"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:drawableStart="@drawable/icon_search"
             android:drawablePadding="8dp"
@@ -56,7 +57,7 @@
             android:id="@+id/btn_clear_text"
             style="@style/ClearButtonTint"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="Очистить строку поиска"
             android:visibility="gone"
@@ -64,10 +65,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/clear"
-            tools:ignore="HardcodedText" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:ignore="HardcodedText,TouchTargetSizeCheck,ImageContrastCheck" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tracks"
@@ -143,9 +142,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recent_tracks"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="183dp"
         android:layout_marginTop="20dp"
         android:visibility="gone"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_recent_tracks" />

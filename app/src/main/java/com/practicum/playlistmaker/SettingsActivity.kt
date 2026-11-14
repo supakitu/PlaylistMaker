@@ -5,12 +5,12 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
-import androidx.core.content.edit
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -30,13 +30,12 @@ class SettingsActivity : AppCompatActivity() {
         val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
         val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
 
-        val sharedPrefs = getSharedPreferences(PrefsKeys.PLAYLIST_MAKER.key, MODE_PRIVATE)
-
         toolbar.setNavigationOnClickListener { finish() }
 
-        switchDarkTheme.isChecked = sharedPrefs.getBoolean(PrefsKeys.DARK_THEME.key, App.DARK_THEME_DEFAULT)
+        switchDarkTheme.isChecked =
+            App.sharedPrefs.getBoolean(PrefsKeys.DARK_THEME.key, App.DARK_THEME_DEFAULT)
         switchDarkTheme.setOnCheckedChangeListener { switcher, isChecked ->
-            sharedPrefs.edit {
+            App.sharedPrefs.edit {
                 putBoolean(PrefsKeys.DARK_THEME.key, isChecked)
             }
 

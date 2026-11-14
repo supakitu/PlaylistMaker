@@ -58,7 +58,7 @@
         android:id="@+id/tv_track_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLength="8"
+        android:maxLength="5"
         android:maxLines="1"
         android:textAppearance="@style/YSRegular11"
         app:layout_constraintBottom_toBottomOf="@+id/image_dot"

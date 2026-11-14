@@ -8,4 +8,7 @@ data class Track(
     val artistName: String,
     @SerializedName("trackTimeMillis") val trackTime: Long,
     @SerializedName("artworkUrl100") val artworkUrl: String,
-)
+) {
+
+    fun matches(track: Track): Boolean = trackId == track.trackId
+}

@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -31,15 +32,18 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val iTunesApiService = retrofit.create(ITunesApi::class.java)
 
-    private var tracks = ArrayList<Track>()
+    private val tracks = mutableListOf<Track>()
     private var lastSearchQuery: String? = null
 
-    private lateinit var etSearch: EditText
     private lateinit var rvTracks: RecyclerView
+    private lateinit var etSearch: EditText
+    private lateinit var btnUpdate: Button
     private lateinit var placeholderNothingFound: TextView
     private lateinit var placeholderNoInternet: TextView
-    private lateinit var btnUpdate: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var tvRecentTracks: TextView
+    private lateinit var rvRecentTracks: RecyclerView
+    private lateinit var btnClearHistory: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +57,15 @@ class SearchActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val btnClearText = findViewById<ImageButton>(R.id.btn_clear_text)
-        etSearch = findViewById(R.id.et_search)
         rvTracks = findViewById(R.id.rv_tracks)
+        etSearch = findViewById(R.id.et_search)
+        btnUpdate = findViewById(R.id.btn_update)
         placeholderNothingFound = findViewById(R.id.placeholder_nothing_found)
         placeholderNoInternet = findViewById(R.id.placeholder_no_internet)
-        btnUpdate = findViewById(R.id.btn_update)
         progressBar = findViewById(R.id.progress_bar)
+        tvRecentTracks = findViewById(R.id.tv_recent_tracks)
+        rvRecentTracks = findViewById(R.id.rv_recent_tracks)
+        btnClearHistory = findViewById(R.id.btn_clear_history)
 
         toolbar.setNavigationOnClickListener { finish() }
 
@@ -68,15 +75,35 @@ class SearchActivity : AppCompatActivity() {
             inputMethodManager?.hideSoftInputFromWindow(toolbar.windowToken, 0)
         }
 
+        SearchHistory.fetchData()
+
+        rvRecentTracks.adapter = RecentTracksAdapter(SearchHistory.recentTracks)
+
         rvTracks.adapter = TracksAdapter(tracks)
 
+        etSearch.setOnFocusChangeListener { _, hasFocus ->
+            if (SearchHistory.recentTracks.isNotEmpty() && hasFocus && etSearch.text.isEmpty()) {
+                hideRvTracks()
+                showRecentTracks()
+            } else {
+                hideRecentTracks()
+            }
+        }
         etSearch.requestFocus()
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 btnClearText.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+
+                if (SearchHistory.recentTracks.isNotEmpty() && etSearch.hasFocus() && s.isNullOrEmpty()) {
+                    hideRvTracks()
+                    showRecentTracks()
+                } else {
+                    hideRecentTracks()
+                }
             }
+
 
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -87,10 +114,10 @@ class SearchActivity : AppCompatActivity() {
                     lastSearchQuery = etSearch.text.toString()
 
                     hideRvTracks()
-                    showProgressBar()
+                    hideEmptyState()
+                    hideOfflineState()
 
-                    hidePlaceholderNothingFound()
-                    hidePlaceholderNoInternet()
+                    showProgressBar()
                 }
 
                 true
@@ -104,8 +131,18 @@ class SearchActivity : AppCompatActivity() {
                 search(lastSearchQuery!!)
 
                 showProgressBar()
-                hidePlaceholderNoInternet()
+                hideOfflineState()
             }
+        }
+
+        btnClearHistory.setOnClickListener {
+            App.sharedPrefs.edit {
+                remove(PrefsKeys.RECENT_TRACKS.key)
+            }
+
+            SearchHistory.recentTracks.clear()
+
+            hideRecentTracks()
         }
     }
 
@@ -124,16 +161,16 @@ class SearchActivity : AppCompatActivity() {
                         rvTracks.adapter?.notifyDataSetChanged()
                         showRvTracks()
                     } else {
-                        showPlaceholderNothingFound()
+                        showEmptyState()
                     }
                 } else {
-                    showPlaceholderNothingFound()
+                    showEmptyState()
                 }
             }
 
             override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
                 hideProgressBar()
-                showPlaceholderNoInternet()
+                showOfflineState()
             }
         }
 
@@ -157,21 +194,39 @@ class SearchActivity : AppCompatActivity() {
         progressBar.visibility = View.GONE
     }
 
-    private fun showPlaceholderNoInternet() {
+    private fun showOfflineState() {
         placeholderNoInternet.visibility = View.VISIBLE
         btnUpdate.visibility = View.VISIBLE
     }
 
-    private fun hidePlaceholderNoInternet() {
-        btnUpdate.visibility = View.GONE
+    private fun hideOfflineState() {
         placeholderNoInternet.visibility = View.GONE
+        btnUpdate.visibility = View.GONE
     }
 
-    private fun showPlaceholderNothingFound() {
+    private fun showEmptyState() {
         placeholderNothingFound.visibility = View.VISIBLE
     }
 
-    private fun hidePlaceholderNothingFound() {
+    private fun hideEmptyState() {
         placeholderNothingFound.visibility = View.GONE
+    }
+
+    private fun showRecentTracks() {
+        hideEmptyState()
+        hideOfflineState()
+        hideRecentTracks()
+
+        rvRecentTracks.adapter?.notifyDataSetChanged()
+
+        tvRecentTracks.visibility = View.VISIBLE
+        rvRecentTracks.visibility = View.VISIBLE
+        btnClearHistory.visibility = View.VISIBLE
+    }
+
+    private fun hideRecentTracks() {
+        tvRecentTracks.visibility = View.GONE
+        rvRecentTracks.visibility = View.GONE
+        btnClearHistory.visibility = View.GONE
     }
 }
