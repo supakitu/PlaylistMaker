@@ -18,7 +18,7 @@ class TracksAdapter(private val tracks: List<Track>) : RecyclerView.Adapter<Trac
         holder.bind(tracks[position])
 
         holder.itemView.setOnClickListener {
-            SearchHistory.buffer = tracks[position]
+            SearchHistory.put(tracks[position])
         }
     }
 

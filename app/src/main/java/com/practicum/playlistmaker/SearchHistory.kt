@@ -6,14 +6,6 @@ class SearchHistory {
 
     companion object {
         val recentTracks = mutableListOf<Track>()
-        var buffer: Track? = null
-            set(value) {
-                field = value
-
-                if (value != null) {
-                    put(value)
-                }
-            }
 
         fun fetchData() {
             val tracksJson = App.sharedPrefs.getString(PrefsKeys.RECENT_TRACKS.key, null)
@@ -25,7 +17,7 @@ class SearchHistory {
             }
         }
 
-        private fun put(track: Track) {
+        fun put(track: Track) {
             var match: Track? = null
 
             if (recentTracks.isNotEmpty()) {
