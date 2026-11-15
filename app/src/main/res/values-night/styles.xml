@@ -2,17 +2,17 @@
 <resources>
 
     <style name="YSMedium22">
-        <item name="android:textColor">@color/yp_white</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
 
-    <style name="YSRegular16" parent="YSMedium22">
+    <style name="YSRegular16">
         <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textColor">@color/yp_white</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
     </style>
 
-    <style name="YSRegular11" parent="YSMedium22">
+    <style name="YSRegular11">
         <item name="android:textSize">11sp</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
     </style>
@@ -23,6 +23,7 @@
     </style>
 
     <style name="Item" parent="YSRegular16">
+        <item name="android:textColor">@color/yp_white</item>
         <item name="android:gravity">center|start</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -56,7 +57,7 @@
     </style>
 
     <style name="ItemTrack">
-        <item name="cardBackgroundColor">@color/yp_black</item>
+        <item name="android:background">@color/yp_black</item>
     </style>
 
     <style name="DotTint">
@@ -67,9 +68,15 @@
         <item name="android:tint">@color/yp_white</item>
     </style>
 
-    <style name="UpdateButtonTint">
+    <style name="SearchActivityButtons">
         <item name="android:textColor">@color/yp_black</item>
         <item name="android:backgroundTint">@color/yp_white</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:insetTop">@dimen/button_inset</item>
+        <item name="android:insetBottom">@dimen/button_inset</item>
+        <item name="android:paddingHorizontal">14dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

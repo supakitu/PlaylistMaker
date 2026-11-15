@@ -11,19 +11,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import java.util.Locale
 
-class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val trackName = itemView.findViewById<TextView>(R.id.tv_track_name)
     private val artistName = itemView.findViewById<TextView>(R.id.tv_artist_name)
     private val trackTime = itemView.findViewById<TextView>(R.id.tv_track_time)
     private val artwork = itemView.findViewById<ImageView>(R.id.image_artwork)
 
-    fun bind(model: Song) {
+    private val radiusPx = 2f.toPx(itemView.context)
+
+    fun bind(model: Track) {
         trackName.text = model.trackName
         artistName.text = model.artistName
-        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(model.trackTime)
-
-        val radiusPx = 2f.toPx(itemView.context)
+        trackTime.text = simpleDateFormat.format(model.trackTime)
 
         Glide.with(itemView)
             .load(model.artworkUrl)
@@ -33,6 +33,7 @@ class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     companion object {
+        val simpleDateFormat = SimpleDateFormat("mm:ss", Locale.US)
 
         private fun Float.toPx(context: Context): Int =
             TypedValue.applyDimension(

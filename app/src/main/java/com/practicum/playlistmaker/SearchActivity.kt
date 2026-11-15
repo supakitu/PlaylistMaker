@@ -9,12 +9,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -32,17 +32,18 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val iTunesApiService = retrofit.create(ITunesApi::class.java)
 
-    private var songs = ArrayList<Song>()
+    private val tracks = mutableListOf<Track>()
     private var lastSearchQuery: String? = null
 
-    private lateinit var etSearch: EditText
     private lateinit var rvTracks: RecyclerView
-    private lateinit var imageNoInternet: ImageView
-    private lateinit var imageNothingFound: ImageView
-    private lateinit var tvNoInternet: TextView
-    private lateinit var tvNothingFound: TextView
-    private lateinit var progressBar: ProgressBar
+    private lateinit var etSearch: EditText
     private lateinit var btnUpdate: Button
+    private lateinit var placeholderNothingFound: TextView
+    private lateinit var placeholderNoInternet: TextView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var tvRecentTracks: TextView
+    private lateinit var rvRecentTracks: RecyclerView
+    private lateinit var btnClearHistory: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,33 +56,54 @@ class SearchActivity : AppCompatActivity() {
         }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val btnClear = findViewById<ImageButton>(R.id.btn_clear_text)
+        val btnClearText = findViewById<ImageButton>(R.id.btn_clear_text)
+        rvTracks = findViewById(R.id.rv_tracks)
         etSearch = findViewById(R.id.et_search)
-        rvTracks = findViewById(R.id.rv_songs)
-        imageNoInternet = findViewById(R.id.image_placeholder_no_internet)
-        imageNothingFound = findViewById(R.id.image_placeholder_nothing_found)
-        tvNoInternet = findViewById(R.id.tv_placeholder_no_internet)
-        tvNothingFound = findViewById(R.id.tv_placeholder_nothing_found)
-        progressBar = findViewById(R.id.progress_bar)
         btnUpdate = findViewById(R.id.btn_update)
+        placeholderNothingFound = findViewById(R.id.placeholder_nothing_found)
+        placeholderNoInternet = findViewById(R.id.placeholder_no_internet)
+        progressBar = findViewById(R.id.progress_bar)
+        tvRecentTracks = findViewById(R.id.tv_recent_tracks)
+        rvRecentTracks = findViewById(R.id.rv_recent_tracks)
+        btnClearHistory = findViewById(R.id.btn_clear_history)
 
         toolbar.setNavigationOnClickListener { finish() }
 
-        btnClear.setOnClickListener {
+        btnClearText.setOnClickListener {
             etSearch.setText("")
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(toolbar.windowToken, 0)
         }
 
-        rvTracks.adapter = SongsAdapter(songs)
+        SearchHistory.fetchData()
 
+        rvRecentTracks.adapter = RecentTracksAdapter(SearchHistory.recentTracks)
+
+        rvTracks.adapter = TracksAdapter(tracks)
+
+        etSearch.setOnFocusChangeListener { _, hasFocus ->
+            if (SearchHistory.recentTracks.isNotEmpty() && hasFocus && etSearch.text.isEmpty()) {
+                hideRvTracks()
+                showRecentTracks()
+            } else {
+                hideRecentTracks()
+            }
+        }
         etSearch.requestFocus()
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                btnClear.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+                btnClearText.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+
+                if (SearchHistory.recentTracks.isNotEmpty() && etSearch.hasFocus() && s.isNullOrEmpty()) {
+                    hideRvTracks()
+                    showRecentTracks()
+                } else {
+                    hideRecentTracks()
+                }
             }
+
 
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -91,66 +113,120 @@ class SearchActivity : AppCompatActivity() {
                     search(etSearch.text.toString())
                     lastSearchQuery = etSearch.text.toString()
 
-                    imageNoInternet.visibility = View.GONE
-                    tvNoInternet.visibility = View.GONE
+                    hideRvTracks()
+                    hideEmptyState()
+                    hideOfflineState()
 
-                    imageNothingFound.visibility = View.GONE
-                    tvNothingFound.visibility = View.GONE
-                    btnUpdate.visibility = View.GONE
-
-                    progressBar.visibility = View.VISIBLE
+                    showProgressBar()
                 }
 
                 true
+            } else {
+                false
             }
-            false
         }
 
         btnUpdate.setOnClickListener {
             if (lastSearchQuery != null) {
                 search(lastSearchQuery!!)
 
-                imageNoInternet.visibility = View.GONE
-                tvNoInternet.visibility = View.GONE
-
-                imageNothingFound.visibility = View.GONE
-                tvNothingFound.visibility = View.GONE
-                btnUpdate.visibility = View.GONE
-
-                progressBar.visibility = View.VISIBLE
+                showProgressBar()
+                hideOfflineState()
             }
+        }
+
+        btnClearHistory.setOnClickListener {
+            App.sharedPrefs.edit {
+                remove(PrefsKeys.RECENT_TRACKS.key)
+            }
+
+            SearchHistory.recentTracks.clear()
+
+            hideRecentTracks()
         }
     }
 
-    fun search(text: String) {
-        iTunesApiService.search(text).enqueue(object : Callback<SongsResponse> {
-            override fun onResponse(call: Call<SongsResponse>, response: Response<SongsResponse>) {
-                progressBar.visibility = View.GONE
+    private fun search(text: String) {
+        val callback = object : Callback<TracksResponse> {
+            override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
+                hideProgressBar()
 
-                if (response.body()?.results?.isNotEmpty() == true) {
-                    songs.clear()
-                    songs.addAll(response.body()?.results!!)
+                if (response.body() != null) {
+                    val responseBody = response.body()!!
 
-                    rvTracks.adapter?.notifyDataSetChanged()
+                    if (responseBody.results.isNotEmpty()) {
+                        tracks.clear()
+                        tracks.addAll(responseBody.results)
+
+                        rvTracks.adapter?.notifyDataSetChanged()
+                        showRvTracks()
+                    } else {
+                        showEmptyState()
+                    }
                 } else {
-                    songs.clear()
-                    rvTracks.adapter?.notifyDataSetChanged()
-
-                    imageNothingFound.visibility = View.VISIBLE
-                    tvNothingFound.visibility = View.VISIBLE
+                    showEmptyState()
                 }
             }
 
-            override fun onFailure(call: Call<SongsResponse>, t: Throwable) {
-                progressBar.visibility = View.GONE
-
-                songs.clear()
-                rvTracks.adapter?.notifyDataSetChanged()
-
-                imageNoInternet.visibility = View.VISIBLE
-                tvNoInternet.visibility = View.VISIBLE
-                btnUpdate.visibility = View.VISIBLE
+            override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
+                hideProgressBar()
+                showOfflineState()
             }
-        })
+        }
+
+        iTunesApiService.search(text).enqueue(callback)
+    }
+
+    private fun showRvTracks() {
+        rvTracks.scrollToPosition(0)
+        rvTracks.visibility = View.VISIBLE
+    }
+
+    private fun hideRvTracks() {
+        rvTracks.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
+
+    private fun showOfflineState() {
+        placeholderNoInternet.visibility = View.VISIBLE
+        btnUpdate.visibility = View.VISIBLE
+    }
+
+    private fun hideOfflineState() {
+        placeholderNoInternet.visibility = View.GONE
+        btnUpdate.visibility = View.GONE
+    }
+
+    private fun showEmptyState() {
+        placeholderNothingFound.visibility = View.VISIBLE
+    }
+
+    private fun hideEmptyState() {
+        placeholderNothingFound.visibility = View.GONE
+    }
+
+    private fun showRecentTracks() {
+        hideEmptyState()
+        hideOfflineState()
+        hideRecentTracks()
+
+        rvRecentTracks.adapter?.notifyDataSetChanged()
+
+        tvRecentTracks.visibility = View.VISIBLE
+        rvRecentTracks.visibility = View.VISIBLE
+        btnClearHistory.visibility = View.VISIBLE
+    }
+
+    private fun hideRecentTracks() {
+        tvRecentTracks.visibility = View.GONE
+        rvRecentTracks.visibility = View.GONE
+        btnClearHistory.visibility = View.GONE
     }
 }

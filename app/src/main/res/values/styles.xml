@@ -19,17 +19,17 @@
     </style>
 
     <style name="YSMedium22">
-        <item name="android:textColor">@color/yp_black</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
 
-    <style name="YSRegular16" parent="YSMedium22">
+    <style name="YSRegular16">
         <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textColor">@color/yp_black</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
     </style>
 
-    <style name="YSRegular11" parent="YSMedium22">
+    <style name="YSRegular11">
         <item name="android:textColor">@color/yp_text_gray</item>
         <item name="android:textSize">11sp</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
@@ -41,6 +41,7 @@
     </style>
 
     <style name="Item" parent="YSRegular16">
+        <item name="android:textColor">@color/yp_black</item>
         <item name="android:gravity">center|start</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -55,8 +56,8 @@
     </style>
 
     <style name="Switch" parent="YSRegular16">
-        <item name="thumbTint">#00D6C3</item>
-        <item name="trackTint">#76EAE0</item>
+        <item name="thumbTint">@color/yp_text_gray</item>
+        <item name="trackTint">@color/yp_light_gray</item>
     </style>
 
     <style name="EditTextSearch" parent="YSRegular16">
@@ -73,7 +74,7 @@
     </style>
 
     <style name="ItemTrack">
-        <item name="cardBackgroundColor">@color/yp_white</item>
+        <item name="android:background">@color/yp_white</item>
     </style>
 
     <style name="DotTint">
@@ -84,9 +85,21 @@
         <item name="android:tint">@color/yp_text_gray</item>
     </style>
 
-    <style name="UpdateButtonTint">
+    <style name="SearchActivityButtons">
         <item name="android:textColor">@color/yp_white</item>
         <item name="android:backgroundTint">@color/yp_black</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:insetTop">@dimen/button_inset</item>
+        <item name="android:insetBottom">@dimen/button_inset</item>
+        <item name="android:paddingHorizontal">14dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Placeholder">
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">19sp</item>
     </style>
 
 </resources>

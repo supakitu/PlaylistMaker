@@ -5,12 +5,15 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,11 +25,22 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
-        val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
+        val switchDarkTheme = findViewById<SwitchMaterial>(R.id.switch_dark_theme)
         val btnShare = findViewById<MaterialButton>(R.id.btn_share)
+        val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
+        val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
 
         toolbar.setNavigationOnClickListener { finish() }
+
+        switchDarkTheme.isChecked =
+            App.sharedPrefs.getBoolean(PrefsKeys.DARK_THEME.key, App.DARK_THEME_DEFAULT)
+        switchDarkTheme.setOnCheckedChangeListener { switcher, isChecked ->
+            App.sharedPrefs.edit {
+                putBoolean(PrefsKeys.DARK_THEME.key, isChecked)
+            }
+
+            App.switchTheme(isChecked)
+        }
 
         btnShare.setOnClickListener {
             val link = getString(R.string.link_practicum_android_developer)
