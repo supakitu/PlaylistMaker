@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
@@ -94,7 +95,7 @@ class SearchActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                btnClearText.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+                btnClearText.isVisible = !s.isNullOrEmpty()
 
                 if (SearchHistory.recentTracks.isNotEmpty() && etSearch.hasFocus() && s.isNullOrEmpty()) {
                     hideRvTracks()
@@ -179,37 +180,37 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showRvTracks() {
         rvTracks.scrollToPosition(0)
-        rvTracks.visibility = View.VISIBLE
+        rvTracks.isVisible = true
     }
 
     private fun hideRvTracks() {
-        rvTracks.visibility = View.GONE
+        rvTracks.isVisible = false
     }
 
     private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        progressBar.isVisible = true
     }
 
     private fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        progressBar.isVisible = false
     }
 
     private fun showOfflineState() {
-        placeholderNoInternet.visibility = View.VISIBLE
-        btnUpdate.visibility = View.VISIBLE
+        placeholderNoInternet.isVisible = true
+        btnUpdate.isVisible = true
     }
 
     private fun hideOfflineState() {
-        placeholderNoInternet.visibility = View.GONE
-        btnUpdate.visibility = View.GONE
+        placeholderNoInternet.isVisible = false
+        btnUpdate.isVisible = false
     }
 
     private fun showEmptyState() {
-        placeholderNothingFound.visibility = View.VISIBLE
+        placeholderNothingFound.isVisible = true
     }
 
     private fun hideEmptyState() {
-        placeholderNothingFound.visibility = View.GONE
+        placeholderNothingFound.isVisible = false
     }
 
     private fun showRecentTracks() {
@@ -219,14 +220,14 @@ class SearchActivity : AppCompatActivity() {
 
         rvRecentTracks.adapter?.notifyDataSetChanged()
 
-        tvRecentTracks.visibility = View.VISIBLE
-        rvRecentTracks.visibility = View.VISIBLE
-        btnClearHistory.visibility = View.VISIBLE
+        tvRecentTracks.isVisible = true
+        rvRecentTracks.isVisible = true
+        btnClearHistory.isVisible = true
     }
 
     private fun hideRecentTracks() {
-        tvRecentTracks.visibility = View.GONE
-        rvRecentTracks.visibility = View.GONE
-        btnClearHistory.visibility = View.GONE
+        tvRecentTracks.isVisible = false
+        rvRecentTracks.isVisible = false
+        btnClearHistory.isVisible = false
     }
 }
