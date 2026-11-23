@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/margin_horizontal"
     android:layout_marginBottom="@dimen/margin_vertical"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
@@ -15,7 +18,7 @@
         android:minHeight="?attr/actionBarSize"
         app:contentInsetStart="0dp"
         app:title="@string/app_name"
-        app:titleTextAppearance="@style/YSMedium22"
+        app:titleTextAppearance="@style/Medium.22"
         app:titleTextColor="@color/yp_white" />
 
     <com.google.android.material.button.MaterialButton
@@ -36,7 +39,7 @@
         android:layout_marginBottom="@dimen/button_margin"
         android:layout_weight="1"
         android:text="@string/media_library"
-        app:icon="@drawable/library" />
+        app:icon="@drawable/icon_media_library" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_settings"
@@ -45,5 +48,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/settings"
-        app:icon="@drawable/settings" />
+        app:icon="@drawable/icon_settings" />
 </LinearLayout>

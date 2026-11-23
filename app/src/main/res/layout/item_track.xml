@@ -25,22 +25,29 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="14dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textAppearance="@style/YSRegular16"
+        android:textAppearance="@style/Regular.16"
+        app:layout_constraintBottom_toTopOf="@id/tv_artist_name"
         app:layout_constraintEnd_toStartOf="@+id/image_arrow"
         app:layout_constraintStart_toEndOf="@+id/image_artwork"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Here Comes The Sun (Remastered version 2010)" />
 
     <TextView
         android:id="@+id/tv_artist_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLength="50"
+        android:ellipsize="end"
         android:maxLines="1"
-        android:textAppearance="@style/YSRegular11"
+        android:textAppearance="@style/Regular.11"
+        android:textColor="@color/yp_text_gray"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_dot"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/tv_track_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
         tools:text="The Beatles" />
@@ -49,20 +56,23 @@
         android:id="@+id/image_dot"
         style="@style/DotTint"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_artist_name"
+        app:layout_constraintEnd_toStartOf="@+id/tv_track_time"
         app:layout_constraintStart_toEndOf="@+id/tv_artist_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_artist_name"
         app:srcCompat="@drawable/icon_dot" />
 
     <TextView
         android:id="@+id/tv_track_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLength="5"
-        android:maxLines="1"
-        android:textAppearance="@style/YSRegular11"
-        app:layout_constraintBottom_toBottomOf="@+id/image_dot"
+        android:layout_height="0dp"
+        android:textAppearance="@style/Regular.11"
+        android:textColor="@color/yp_text_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_artist_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_track_name"
         app:layout_constraintStart_toEndOf="@+id/image_dot"
+        app:layout_constraintTop_toTopOf="@+id/tv_artist_name"
         tools:text="3:55" />
 
     <ImageView
@@ -73,6 +83,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_forward" />
+        app:srcCompat="@drawable/icon_arrow_forward" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

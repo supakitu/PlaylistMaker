@@ -77,7 +77,6 @@ class SearchActivity : AppCompatActivity() {
         }
 
         SearchHistory.fetchData()
-
         rvRecentTracks.adapter = RecentTracksAdapter(SearchHistory.recentTracks)
 
         rvTracks.adapter = TracksAdapter(tracks)
@@ -104,7 +103,6 @@ class SearchActivity : AppCompatActivity() {
                     hideRecentTracks()
                 }
             }
-
 
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -151,6 +149,7 @@ class SearchActivity : AppCompatActivity() {
         val callback = object : Callback<TracksResponse> {
             override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
                 hideProgressBar()
+                hideRecentTracks()
 
                 if (response.body() != null) {
                     val responseBody = response.body()!!

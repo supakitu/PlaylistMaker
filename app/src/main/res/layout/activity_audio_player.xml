@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".AudioPlayerActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/guidelines_horizontal_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/guidelines_horizontal_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="20dp" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/icon_arrow_back" />
+
+        <ImageView
+            android:id="@+id/image_artwork"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="26dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintHeight_max="500dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_track_name"
+            style="@style/Medium.22"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/image_artwork"
+            tools:text="Yesterday (Remastered 2009)" />
+
+        <TextView
+            android:id="@+id/tv_artist_name"
+            style="@style/Medium.14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
+            tools:text="The Beatles " />
+
+        <Button
+            android:id="@+id/btn_add_to_media_library"
+            style="@style/AudioPlayerButtons"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="54dp"
+            app:icon="@drawable/icon_add_to_media_library"
+            app:layout_constraintEnd_toStartOf="@+id/btn_play"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_artist_name" />
+
+        <Button
+            android:id="@+id/btn_play"
+            style="@style/PlayButton"
+            android:layout_width="83.33dp"
+            android:layout_height="83.33dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            app:cornerRadius="999dp"
+            app:icon="@drawable/icon_play"
+            app:iconGravity="top"
+            app:iconSize="83.33dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_add_to_media_library"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_to_favorites"
+            app:layout_constraintStart_toEndOf="@+id/btn_add_to_media_library"
+            app:layout_constraintTop_toTopOf="@+id/btn_add_to_media_library" />
+
+        <Button
+            android:id="@+id/btn_add_to_favorites"
+            style="@style/AudioPlayerButtons"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            app:icon="@drawable/icon_heart"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/btn_play"
+            app:layout_constraintTop_toTopOf="@+id/btn_add_to_media_library" />
+
+        <TextView
+            android:id="@+id/tv_track_time_remaining"
+            style="@style/Medium.14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.33dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_play"
+            app:layout_constraintStart_toStartOf="@+id/btn_play"
+            app:layout_constraintTop_toBottomOf="@+id/btn_play"
+            tools:text="0:30" />
+
+        <TextView
+            android:id="@+id/tv_track_time_column_left"
+            style="@style/LeftColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/track_time"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_track_time_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/tv_track_time_column_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="@id/tv_track_time_column_right" />
+
+        <TextView
+            android:id="@+id/tv_track_time_column_right"
+            style="@style/RightColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_collection_name_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_track_time_column_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_track_time_remaining"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="5:35" />
+
+        <TextView
+            android:id="@+id/tv_collection_name_column_left"
+            style="@style/LeftColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/collection_name"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_collection_name_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/tv_collection_name_column_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_collection_name_column_right" />
+
+        <TextView
+            android:id="@+id/tv_collection_name_column_right"
+            style="@style/RightColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/tv_release_date_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_collection_name_column_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_track_time_column_right"
+            tools:text="Help!" />
+
+        <TextView
+            android:id="@+id/tv_release_date_column_left"
+            style="@style/LeftColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/release_date"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_release_date_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/tv_release_date_column_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_release_date_column_right" />
+
+        <TextView
+            android:id="@+id/tv_release_date_column_right"
+            style="@style/RightColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/tv_primary_genre_name_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_release_date_column_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_collection_name_column_right"
+            tools:text="1965" />
+
+        <TextView
+            android:id="@+id/tv_primary_genre_name_column_left"
+            style="@style/LeftColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/primary_genre_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_primary_genre_name_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/tv_primary_genre_name_column_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_primary_genre_name_column_right" />
+
+        <TextView
+            android:id="@+id/tv_primary_genre_name_column_right"
+            style="@style/RightColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tv_country_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_primary_genre_name_column_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_release_date_column_right"
+            tools:text="Rock" />
+
+        <TextView
+            android:id="@+id/tv_country_column_left"
+            style="@style/LeftColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/country"
+            app:layout_constraintBottom_toBottomOf="@id/tv_country_column_right"
+            app:layout_constraintEnd_toStartOf="@+id/tv_country_column_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_country_column_right" />
+
+        <TextView
+            android:id="@+id/tv_country_column_right"
+            style="@style/RightColumnItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_country_column_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_primary_genre_name_column_right"
+            tools:text="Великобритания" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

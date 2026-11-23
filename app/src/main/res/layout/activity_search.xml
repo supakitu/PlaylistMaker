@@ -8,6 +8,27 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/guidelines_horizontal_16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/guidelines_horizontal_16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -17,20 +38,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIcon="@drawable/icon_arrow_back"
         app:title="@string/search" />
 
     <LinearLayout
         android:id="@+id/et_search_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/et_search_height"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_et_search"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <EditText
             android:id="@+id/et_search"
@@ -42,7 +62,6 @@
             android:drawableStart="@drawable/icon_search"
             android:drawablePadding="8dp"
             android:hint="@string/search"
-            android:importantForAutofill="no"
             android:inputType="text"
             android:paddingStart="12dp"
             android:singleLine="true"
@@ -50,8 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_clear_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry,TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_clear_text"
@@ -59,13 +77,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="Очистить строку поиска"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/clear"
-            tools:ignore="HardcodedText,TouchTargetSizeCheck,ImageContrastCheck" />
+            app:srcCompat="@drawable/icon_clear" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -83,31 +99,31 @@
     <TextView
         android:id="@+id/placeholder_nothing_found"
         style="@style/Placeholder"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="@dimen/margin_top_placeholder"
         android:gravity="center"
         android:text="@string/nothing_found"
         android:visibility="gone"
         app:drawableTopCompat="@drawable/placeholder_nothing_found"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/et_search_layout" />
 
     <TextView
         android:id="@+id/placeholder_no_internet"
         style="@style/Placeholder"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="@dimen/margin_top_placeholder"
         android:gravity="center"
         android:text="@string/no_internet"
         android:visibility="gone"
         app:drawableTopCompat="@drawable/placeholder_no_internet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/et_search_layout" />
 
     <Button
@@ -118,34 +134,37 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:text="@string/update"
+        android:textAppearance="@style/Medium.14"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_no_internet"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_no_internet" />
 
     <TextView
         android:id="@+id/tv_recent_tracks"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginTop="42dp"
-        android:fontFamily="@font/ys_display_medium"
-        android:gravity="center"
         android:text="@string/recent_tracks"
-        android:textSize="19sp"
+        android:textAppearance="@style/Medium.19"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search_layout" />
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/rv_recent_tracks"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/et_search_layout"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recent_tracks"
         android:layout_width="0dp"
-        android:layout_height="183dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:visibility="gone"
         app:layoutManager="LinearLayoutManager"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/btn_clear_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_recent_tracks" />
@@ -154,15 +173,18 @@
         android:id="@+id/btn_clear_history"
         style="@style/SearchActivityButtons"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
+        android:minHeight="36dp"
         android:text="@string/clear_history"
+        android:textAppearance="@style/Medium.14"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_recent_tracks"
-        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/rv_recent_tracks" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
