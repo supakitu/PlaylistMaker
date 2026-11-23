@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class RecentTracksAdapter(private val recentTracks: List<Track>) :
-    RecyclerView.Adapter<TrackViewHolder>() {
+class RecentTracksAdapter(private val recentTracks: List<Track>) : RecyclerView.Adapter<TrackViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val itemView = LayoutInflater

@@ -131,7 +131,7 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_play"
             app:layout_constraintStart_toStartOf="@+id/btn_play"
             app:layout_constraintTop_toBottomOf="@+id/btn_play"
-            tools:text="0:30" />
+            tools:text="5:35" />
 
         <TextView
             android:id="@+id/tv_track_time_column_left"

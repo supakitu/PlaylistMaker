@@ -18,6 +18,7 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var imageArtwork: ImageView
     private lateinit var tvTrackName: TextView
     private lateinit var tvArtistName: TextView
+    private lateinit var tvTrackTimeRemaining: TextView
 
     private lateinit var tvCollectionNameColumnLeft: TextView
     private lateinit var tvReleaseDateColumnLeft: TextView
@@ -47,7 +48,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         val btnAddToMediaLibrary = findViewById<Button>(R.id.btn_add_to_media_library)
         val btnPlay = findViewById<Button>(R.id.btn_play)
         val btnAddToFavorites = findViewById<Button>(R.id.btn_add_to_favorites)
-        val tvTrackTimeRemaining = findViewById<TextView>(R.id.tv_track_time_remaining) // пока пусто так как неоткуда брать такую инфу
+        tvTrackTimeRemaining = findViewById(R.id.tv_track_time_remaining)
 
         tvCollectionNameColumnLeft = findViewById(R.id.tv_collection_name_column_left)
         tvReleaseDateColumnLeft = findViewById(R.id.tv_release_date_column_left)
@@ -75,6 +76,7 @@ class AudioPlayerActivity : AppCompatActivity() {
 
             tvTrackName.text = track.trackName
             tvArtistName.text = track.artistName
+            tvTrackTimeRemaining.text = track.trackTime.toMmSs()
 
             tvTrackTimeColumnRight.text = track.trackTime.toMmSs()
 
