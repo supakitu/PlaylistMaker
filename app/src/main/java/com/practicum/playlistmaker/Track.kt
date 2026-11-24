@@ -8,7 +8,14 @@ data class Track(
     val artistName: String,
     @SerializedName("trackTimeMillis") val trackTime: Long,
     @SerializedName("artworkUrl100") val artworkUrl: String,
+    val collectionName: String,
+    val releaseDate: String,
+    val country: String,
+    val primaryGenreName: String,
 ) {
 
     fun matches(track: Track): Boolean = trackId == track.trackId
+
+    fun getArtworkUrl(ratio: Int): String =
+        artworkUrl.replaceAfterLast('/', "${ratio}x${ratio}bb.jpg")
 }

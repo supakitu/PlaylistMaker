@@ -6,7 +6,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -15,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_vertical"
         android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIcon="@drawable/icon_arrow_back"
         app:title="@string/settings" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -26,7 +27,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="@dimen/margin_horizontal"
         android:text="@string/black_theme"
-        app:switchTextAppearance="@style/YSRegular16" />
+        app:switchTextAppearance="@style/Regular.16" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_share"
@@ -34,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:text="@string/share"
-        app:icon="@drawable/share" />
+        app:icon="@drawable/icon_share" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_support"
@@ -42,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:text="@string/support"
-        app:icon="@drawable/support" />
+        app:icon="@drawable/icon_support" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_user_agreement"
@@ -50,6 +51,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:text="@string/user_agreement"
-        app:icon="@drawable/arrow_forward" />
+        app:icon="@drawable/icon_arrow_forward" />
 
 </LinearLayout>

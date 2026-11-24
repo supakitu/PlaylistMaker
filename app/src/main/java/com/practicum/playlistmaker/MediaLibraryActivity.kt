@@ -8,6 +8,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MediaLibraryActivity : AppCompatActivity() {
+
+    private lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,7 +21,12 @@ class MediaLibraryActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        bindViews()
+
         toolbar.setNavigationOnClickListener { finish() }
+    }
+
+    private fun bindViews() {
+        toolbar = findViewById(R.id.toolbar)
     }
 }
