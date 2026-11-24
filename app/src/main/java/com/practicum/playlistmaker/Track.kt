@@ -16,5 +16,6 @@ data class Track(
 
     fun matches(track: Track): Boolean = trackId == track.trackId
 
-    fun getArtworkUrl(ratio: Int) = artworkUrl.replaceAfterLast('/', "${ratio}x${ratio}bb.jpg")
+    fun getArtworkUrl(ratio: Int): String =
+        artworkUrl.replaceAfterLast('/', "${ratio}x${ratio}bb.jpg")
 }

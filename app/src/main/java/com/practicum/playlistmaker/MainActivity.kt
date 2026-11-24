@@ -9,6 +9,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var btnSearch: Button
+    private lateinit var btnSettings: Button
+    private lateinit var btnMediaLibrary: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,23 +24,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val btnSearch = findViewById<Button>(R.id.btn_search)
-        val btnSettings = findViewById<Button>(R.id.btn_settings)
-        val btnMediaLibrary = findViewById<Button>(R.id.btn_media_library)
+        bindViews()
 
         btnSearch.setOnClickListener {
-            val searchIntent = Intent(this, SearchActivity::class.java)
-            startActivity(searchIntent)
+            startActivity(Intent(this, SearchActivity::class.java))
         }
 
         btnMediaLibrary.setOnClickListener {
-            val mediaLibraryIntent = Intent(this, MediaLibraryActivity::class.java)
-            startActivity(mediaLibraryIntent)
+            startActivity(Intent(this, MediaLibraryActivity::class.java))
         }
 
         btnSettings.setOnClickListener {
-            val settingsIntent = Intent(this, SettingsActivity::class.java)
-            startActivity(settingsIntent)
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
+    }
+
+    private fun bindViews() {
+        btnSearch = findViewById(R.id.btn_search)
+        btnSettings = findViewById(R.id.btn_settings)
+        btnMediaLibrary = findViewById(R.id.btn_media_library)
     }
 }

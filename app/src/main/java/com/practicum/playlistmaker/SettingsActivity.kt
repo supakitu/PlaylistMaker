@@ -14,6 +14,12 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
 
+    private lateinit var toolbar: Toolbar
+    private lateinit var switchDarkTheme: SwitchMaterial
+    private lateinit var btnShare: MaterialButton
+    private lateinit var btnSupport: MaterialButton
+    private lateinit var btnUserAgreement: MaterialButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,17 +30,15 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val switchDarkTheme = findViewById<SwitchMaterial>(R.id.switch_dark_theme)
-        val btnShare = findViewById<MaterialButton>(R.id.btn_share)
-        val btnSupport = findViewById<MaterialButton>(R.id.btn_support)
-        val btnUserAgreement = findViewById<MaterialButton>(R.id.btn_user_agreement)
+        bindViews()
 
         toolbar.setNavigationOnClickListener { finish() }
 
-        switchDarkTheme.isChecked =
-            App.sharedPrefs.getBoolean(PrefsKeys.DARK_THEME.key, App.DARK_THEME_DEFAULT)
-        switchDarkTheme.setOnCheckedChangeListener { switcher, isChecked ->
+        switchDarkTheme.isChecked = App.sharedPrefs.getBoolean(
+            PrefsKeys.DARK_THEME.key,
+            App.DARK_THEME_DEFAULT
+        )
+        switchDarkTheme.setOnCheckedChangeListener { _, isChecked ->
             App.sharedPrefs.edit {
                 putBoolean(PrefsKeys.DARK_THEME.key, isChecked)
             }
@@ -46,8 +50,9 @@ class SettingsActivity : AppCompatActivity() {
             val link = getString(R.string.link_practicum_android_developer)
 
             val intent = Intent(Intent.ACTION_SEND)
+                .putExtra(Intent.EXTRA_TEXT, link)
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT, link)
+
             startActivity(intent)
         }
 
@@ -57,16 +62,24 @@ class SettingsActivity : AppCompatActivity() {
             val emailText = getString(R.string.email_text)
 
             val intent = Intent(Intent.ACTION_SENDTO, "mailto:$myEmail".toUri())
-            intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
-            intent.putExtra(Intent.EXTRA_TEXT, emailText)
+                .putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+                .putExtra(Intent.EXTRA_TEXT, emailText)
+
             startActivity(intent)
         }
 
         btnUserAgreement.setOnClickListener {
             val link = getString(R.string.link_practicum_offer)
 
-            val intent = Intent(Intent.ACTION_VIEW, link.toUri())
-            startActivity(intent)
+            startActivity(Intent(Intent.ACTION_VIEW, link.toUri()))
         }
+    }
+
+    private fun bindViews() {
+        toolbar = findViewById(R.id.toolbar)
+        switchDarkTheme = findViewById(R.id.switch_dark_theme)
+        btnShare = findViewById(R.id.btn_share)
+        btnSupport = findViewById(R.id.btn_support)
+        btnUserAgreement = findViewById(R.id.btn_user_agreement)
     }
 }

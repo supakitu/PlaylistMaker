@@ -36,6 +36,8 @@ class SearchActivity : AppCompatActivity() {
     private val tracks = mutableListOf<Track>()
     private var lastSearchQuery: String? = null
 
+    private lateinit var toolbar: Toolbar
+    private lateinit var btnClearText: ImageButton
     private lateinit var rvTracks: RecyclerView
     private lateinit var etSearch: EditText
     private lateinit var btnUpdate: Button
@@ -56,17 +58,7 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val btnClearText = findViewById<ImageButton>(R.id.btn_clear_text)
-        rvTracks = findViewById(R.id.rv_tracks)
-        etSearch = findViewById(R.id.et_search)
-        btnUpdate = findViewById(R.id.btn_update)
-        placeholderNothingFound = findViewById(R.id.placeholder_nothing_found)
-        placeholderNoInternet = findViewById(R.id.placeholder_no_internet)
-        progressBar = findViewById(R.id.progress_bar)
-        tvRecentTracks = findViewById(R.id.tv_recent_tracks)
-        rvRecentTracks = findViewById(R.id.rv_recent_tracks)
-        btnClearHistory = findViewById(R.id.btn_clear_history)
+        bindViews()
 
         toolbar.setNavigationOnClickListener { finish() }
 
@@ -81,13 +73,8 @@ class SearchActivity : AppCompatActivity() {
 
         rvTracks.adapter = TracksAdapter(tracks)
 
-        etSearch.setOnFocusChangeListener { _, hasFocus ->
-            if (SearchHistory.recentTracks.isNotEmpty() && hasFocus && etSearch.text.isEmpty()) {
-                hideRvTracks()
-                showRecentTracks()
-            } else {
-                hideRecentTracks()
-            }
+        etSearch.setOnFocusChangeListener { _, _ ->
+            toggleRecentTracksVisibility()
         }
         etSearch.requestFocus()
         etSearch.addTextChangedListener(object : TextWatcher {
@@ -96,12 +83,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 btnClearText.isVisible = !s.isNullOrEmpty()
 
-                if (SearchHistory.recentTracks.isNotEmpty() && etSearch.hasFocus() && s.isNullOrEmpty()) {
-                    hideRvTracks()
-                    showRecentTracks()
-                } else {
-                    hideRecentTracks()
-                }
+                toggleRecentTracksVisibility()
             }
 
             override fun afterTextChanged(s: Editable?) {}
@@ -141,6 +123,29 @@ class SearchActivity : AppCompatActivity() {
 
             SearchHistory.recentTracks.clear()
 
+            hideRecentTracks()
+        }
+    }
+
+    private fun bindViews() {
+        toolbar = findViewById(R.id.toolbar)
+        btnClearText = findViewById(R.id.btn_clear_text)
+        rvTracks = findViewById(R.id.rv_tracks)
+        etSearch = findViewById(R.id.et_search)
+        btnUpdate = findViewById(R.id.btn_update)
+        placeholderNothingFound = findViewById(R.id.placeholder_nothing_found)
+        placeholderNoInternet = findViewById(R.id.placeholder_no_internet)
+        progressBar = findViewById(R.id.progress_bar)
+        tvRecentTracks = findViewById(R.id.tv_recent_tracks)
+        rvRecentTracks = findViewById(R.id.rv_recent_tracks)
+        btnClearHistory = findViewById(R.id.btn_clear_history)
+    }
+
+    private fun toggleRecentTracksVisibility() {
+        if (SearchHistory.recentTracks.isNotEmpty() && etSearch.hasFocus() && etSearch.text.isEmpty()) {
+            hideRvTracks()
+            showRecentTracks()
+        } else {
             hideRecentTracks()
         }
     }

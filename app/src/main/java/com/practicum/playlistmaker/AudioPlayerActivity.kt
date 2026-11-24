@@ -15,9 +15,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class AudioPlayerActivity : AppCompatActivity() {
 
+    private lateinit var toolbar: Toolbar
     private lateinit var imageArtwork: ImageView
     private lateinit var tvTrackName: TextView
     private lateinit var tvArtistName: TextView
+    private lateinit var btnAddToMediaLibrary: Button
+    private lateinit var btnPlay: Button
+    private lateinit var btnAddToFavorites: Button
     private lateinit var tvTrackTimeRemaining: TextView
 
     private lateinit var tvCollectionNameColumnLeft: TextView
@@ -39,15 +43,21 @@ class AudioPlayerActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        bindViews()
+
         toolbar.setNavigationOnClickListener { finish() }
 
+        renderTrackFromIntent()
+    }
+
+    private fun bindViews() {
+        toolbar = findViewById(R.id.toolbar)
         imageArtwork = findViewById(R.id.image_artwork)
         tvTrackName = findViewById(R.id.tv_track_name)
         tvArtistName = findViewById(R.id.tv_artist_name)
-        val btnAddToMediaLibrary = findViewById<Button>(R.id.btn_add_to_media_library)
-        val btnPlay = findViewById<Button>(R.id.btn_play)
-        val btnAddToFavorites = findViewById<Button>(R.id.btn_add_to_favorites)
+        btnAddToMediaLibrary = findViewById(R.id.btn_add_to_media_library)
+        btnPlay = findViewById(R.id.btn_play)
+        btnAddToFavorites = findViewById(R.id.btn_add_to_favorites)
         tvTrackTimeRemaining = findViewById(R.id.tv_track_time_remaining)
 
         tvCollectionNameColumnLeft = findViewById(R.id.tv_collection_name_column_left)
@@ -58,44 +68,46 @@ class AudioPlayerActivity : AppCompatActivity() {
         tvReleaseDateColumnRight = findViewById(R.id.tv_release_date_column_right)
         tvPrimaryGenreNameColumnRight = findViewById(R.id.tv_primary_genre_name_column_right)
         tvCountryColumnRight = findViewById(R.id.tv_country_column_right)
-
-        loadFromIntent()
     }
 
-    private fun loadFromIntent() {
+    private fun renderTrackFromIntent() {
         val trackJson = intent.getStringExtra("TRACK")
 
         if (trackJson != null) {
             val track = App.gson.fromJson(trackJson, Track::class.java)
 
-            Glide.with(this)
-                .load(track.getArtworkUrl(512))
-                .placeholder(R.drawable.placeholder_track)
-                .transform(RoundedCorners(8f.toPx(this)))
-                .into(imageArtwork)
-
-            tvTrackName.text = track.trackName
-            tvArtistName.text = track.artistName
-            tvTrackTimeRemaining.text = track.trackTime.toMmSs()
-
-            tvTrackTimeColumnRight.text = track.trackTime.toMmSs()
-
-            if (track.collectionName.isNotEmpty()) {
-                tvCollectionNameColumnRight.text = track.collectionName
-
-                tvCollectionNameColumnLeft.isVisible = true
-                tvCollectionNameColumnRight.isVisible = true
-            }
-
-            if (track.releaseDate.isNotEmpty()) {
-                tvReleaseDateColumnRight.text = track.releaseDate.take(4)
-
-                tvReleaseDateColumnLeft.isVisible = true
-                tvReleaseDateColumnRight.isVisible = true
-            }
-
-            tvPrimaryGenreNameColumnRight.text = track.primaryGenreName
-            tvCountryColumnRight.text = track.country
+            bindTrack(track)
         }
+    }
+
+    private fun bindTrack(track: Track) {
+        Glide.with(this)
+            .load(track.getArtworkUrl(512))
+            .placeholder(R.drawable.placeholder_track)
+            .transform(RoundedCorners(8f.toPx(this)))
+            .into(imageArtwork)
+
+        tvTrackName.text = track.trackName
+        tvArtistName.text = track.artistName
+        tvTrackTimeRemaining.text = track.trackTime.toMmSs()
+
+        tvTrackTimeColumnRight.text = track.trackTime.toMmSs()
+
+        if (track.collectionName.isNotBlank()) {
+            tvCollectionNameColumnRight.text = track.collectionName
+
+            tvCollectionNameColumnLeft.isVisible = true
+            tvCollectionNameColumnRight.isVisible = true
+        }
+
+        if (track.releaseDate.isNotBlank()) {
+            tvReleaseDateColumnRight.text = track.releaseDate.take(4)
+
+            tvReleaseDateColumnLeft.isVisible = true
+            tvReleaseDateColumnRight.isVisible = true
+        }
+
+        tvPrimaryGenreNameColumnRight.text = track.primaryGenreName
+        tvCountryColumnRight.text = track.country
     }
 }
